@@ -19,3 +19,18 @@ CREATE TABLE invoices(
     medical_history_id INTEGER NOT NULL REFERENCES medical_histories(id)
 );
 
+CREATE TABLE invoice_items (
+    id SERIAL NOT NULL PRIMARY KEY,
+    unit_price DECIMAL(10,2) NOT NULL,
+    quantity INTEGER NOT NULL,
+    total_price DECIMAL(10,2) NOT NULL,
+    invoice_id INTEGER REFERENCES invoices(id),
+    treatment_id INTEGER REFERENCES treatments(id)
+);
+
+CREATE TABLE treatments (
+    id SERIAL NOT NULL PRIMARY KEY,
+    type VARCHAR(30),
+    name VARCHAR(30)
+);
+
