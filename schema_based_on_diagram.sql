@@ -30,7 +30,7 @@ CREATE TABLE invoice_items (
 
 CREATE TABLE treatments (
     id SERIAL NOT NULL PRIMARY KEY,
-    type VARCHAR(30),
-    name VARCHAR(30)
+    type VARCHAR(60),
+    name VARCHAR(60)
 );
 
