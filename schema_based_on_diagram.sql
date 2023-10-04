@@ -34,3 +34,16 @@ CREATE TABLE treatments (
     name VARCHAR(60)
 );
 
+CREATE TABLE medical_histories_treatments (
+    PRIMARY KEY (medical_histories_id, treatments_id),
+    medical_histories_id INTEGER REFERENCES medical_histories(id),
+    treatments_id INTEGER REFERENCES treatments(id)
+);
+
+-- Indexes
+CREATE INDEX idx_patient_id ON medical_histories(patient_id);
+CREATE INDEX idx_medical_history_id ON invoices(medical_histories_id);
+CREATE INDEX idx_invoice_id ON invoice_items(invoice_id);
+CREATE INDEX idx_treatment_id ON invoice_items(treatment_id);
+CREATE INDEX idx_medical_histories_id ON medical_histories_treatments(medical_histories_id);
+CREATE INDEX idx_treatments_id ON medical_histories_treatments(treatments_id);
