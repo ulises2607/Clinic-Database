@@ -19,6 +19,12 @@ CREATE TABLE invoices(
     medical_history_id INTEGER NOT NULL REFERENCES medical_histories(id)
 );
 
+CREATE TABLE treatments (
+    id SERIAL NOT NULL PRIMARY KEY,
+    type VARCHAR(60),
+    name VARCHAR(60)
+);
+
 CREATE TABLE invoice_items (
     id SERIAL NOT NULL PRIMARY KEY,
     unit_price DECIMAL(10,2) NOT NULL,
@@ -26,12 +32,6 @@ CREATE TABLE invoice_items (
     total_price DECIMAL(10,2) NOT NULL,
     invoice_id INTEGER REFERENCES invoices(id),
     treatment_id INTEGER REFERENCES treatments(id)
-);
-
-CREATE TABLE treatments (
-    id SERIAL NOT NULL PRIMARY KEY,
-    type VARCHAR(60),
-    name VARCHAR(60)
 );
 
 CREATE TABLE medical_histories_treatments (
@@ -42,7 +42,7 @@ CREATE TABLE medical_histories_treatments (
 
 -- Indexes
 CREATE INDEX idx_patient_id ON medical_histories(patient_id);
-CREATE INDEX idx_medical_history_id ON invoices(medical_histories_id);
+CREATE INDEX idx_medical_history_id ON invoices(medical_history_id);
 CREATE INDEX idx_invoice_id ON invoice_items(invoice_id);
 CREATE INDEX idx_treatment_id ON invoice_items(treatment_id);
 CREATE INDEX idx_medical_histories_id ON medical_histories_treatments(medical_histories_id);
